@@ -1,0 +1,6 @@
+[book]
+title = "JamSys"
+authors = ["JamSys"]
+language = "en"
+multilingual = false
+src = "docs"
