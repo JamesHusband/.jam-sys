@@ -3,11 +3,13 @@
 # #############################################################################
 #
 # FILE: set-dock-apps.sh
-# DESCRIPTION: Configure persistent Dock applications using dockutil
+# DESCRIPTION: Configure Dock persistent applications
 #
 # #############################################################################
 
 source "$JAMSYS_ROOT/scripts/lib/logging.sh"
+source "$JAMSYS_ROOT/scripts/systems/macos/lib/restart-services.sh"
+
 
 set_dock_apps() {
 
@@ -24,6 +26,5 @@ set_dock_apps() {
     dockutil --add "/Applications/${app}.app" --no-restart
   done
 
-  killall Dock 2>/dev/null || true
+  queue_restart Dock
 }
-

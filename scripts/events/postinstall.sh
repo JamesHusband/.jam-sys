@@ -3,7 +3,7 @@
 # #############################################################################
 #
 # FILE: postinstall.sh
-# DESCRIPTION: JamSys postinstall event
+# DESCRIPTION: JamSys post-install event
 #
 # #############################################################################
 
@@ -16,11 +16,31 @@ LOG_CONTEXT="postinstall"
 
 source "$(dirname "$0")/../lib/env.sh"
 source "$JAMSYS_ROOT/scripts/lib/logging.sh"
+source "$JAMSYS_ROOT/scripts/lib/run-modules.sh"
+source "$JAMSYS_ROOT/scripts/systems/macos/lib/restart-services.sh"
 
 
 # EVENT
 # -----------------------------------------------------------------------------
 
-event "postinstall"
+event "POSTINSTALL"
 
-info "postinstall placeholder"
+
+# MACOS DEFAULTS
+# -----------------------------------------------------------------------------
+
+run_modules "$JAMSYS_ROOT/scripts/systems/macos/modules/defaults"
+
+
+# APPLY SERVICE RESTARTS
+# -----------------------------------------------------------------------------
+
+restart_services
+
+
+# SCAFFOLDING
+# -----------------------------------------------------------------------------
+
+info "Creating development directory"
+
+mkdir -p "$HOME/Development"
